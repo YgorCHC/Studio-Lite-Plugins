@@ -43,14 +43,30 @@ end
 PluginPage.Position = UDim2.new(0.42,0,1,0)
 PluginPage.New.Text = "Generate Battleground"
 PluginPage.New.Name = "Generate"
-
+local SG = game.Players.LocalPlayer.PlayerGui.StudioGui
 local GenerateButton:TextButton = PluginPage:FindFirstChild('Generate')
 GenerateButton.MouseButton1Click:Connect(function()
 
-
+	
+	
+	local Warn1 = SG.WarningText:Clone()
+	Warn1.Name  ='Warn1'
+	Warn1.Parent = SG
+	Warn1.Visible = true
+	Warn1.Text = 'Starting..'
+	game.Debris:AddItem(Warn1, 0.8)
+	task.wait(.8)
+	warn('Credits: SnowCHC')
+	local Warn1 = SG.WarningText:Clone()
+	Warn1.Name  ='Warn1'
+	Warn1.Parent = SG
+	Warn1.Visible = true
+	Warn1.Text = 'Succes!!'
+	game.Debris:AddItem(Warn1, 0.5)
+	
 	local M1_Client = Instance.new('LocalScript', game.StarterPlayer.StarterPlayerScripts)
 	M1_Client.Name = 'MainClient'
-
+	
 	local TextBox = Instance.new('TextBox',M1_Client)
 	TextBox.Name =  'SL_CodeTextBox'
 	TextBox.Text = [[
@@ -120,7 +136,7 @@ GenerateButton.MouseButton1Click:Connect(function()
 		--Properties:
 
 		AwakenBar.Name = "AwakenBar"
-		AwakenBar.Parent = game.Workspace
+		AwakenBar.Parent = game.StarterGui
 		AwakenBar.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 		MagicHealth.Name = "MagicHealth"
