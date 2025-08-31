@@ -1,7 +1,7 @@
 local Topbar=game.Players.LocalPlayer.PlayerGui .StudioGui.TopBar 
 
 if Topbar: FindFirstChild("Plugin Button") then
-	Topbar["PluginButton"]:Destroy()
+	Topbar["Plugin Button"]:Destroy()
 	pcall(function()
 		Topbar.PluginsMenu:Destroy()
 	end)
