@@ -49,7 +49,7 @@ local GenerateButton:TextButton = PluginPage:FindFirstChild('Generate')
 
 GenerateButton.MouseButton1Click:Connect(function()
 
-	if workspace.All_Scripts_91:FindFirstChildWhichIsA('Script') and workspace:FindFirstChildWhichIsA('LocalScript') and workspace:FindFirstChildWhichIsA('ModuleScript') then
+	if workspace.All_Scripts_91:FindFirstChildWhichIsA('Script') and workspace.All_Scripts_91:FindFirstChildWhichIsA('LocalScript') and workspace.All_Scripts_91:FindFirstChildWhichIsA('ModuleScript') then
 
 		
 		local function CreateLocalScript(Name:string, Codigo:string, parent:Object)
@@ -59,7 +59,23 @@ GenerateButton.MouseButton1Click:Connect(function()
 			NewScript.Parent = parent
 			return NewScript
 		end
-		
+
+		local function CreateScript(Name:string, Codigo:string, parent:Object)
+			local NewScript = workspace.All_Scripts_91.Script:Clone()
+			NewScript.Name = Name
+			NewScript.SL_CodeTextBox.Text =  Codigo
+			NewScript.Parent = parent
+			return NewScript
+		end
+
+		local function CreateModuleScript(Name:string, Codigo:string, parent:Object)
+			local NewScript = workspace.All_Scripts_91.ModuleScript:Clone()
+			NewScript.Name = Name
+			NewScript.SL_CodeTextBox.Text =  Codigo
+			NewScript.Parent = parent
+			return NewScript
+		end
+
 		local Warn1 = SG.WarningText:Clone()
 		Warn1.Name  ='Warn1'
 		Warn1.Parent = SG
@@ -80,7 +96,7 @@ GenerateButton.MouseButton1Click:Connect(function()
 		Warn1.Text = 'Success!!'
 		game.Debris:AddItem(Warn1, 0.5)
 		
-		local M1Script = CreateLocalScript('M1Script', [[
+		local M1Script = CreateLocalScript('MainScript', [[
 				local UIS = game:GetService('UserInputService')
 				local MobileHudFoda10 = Instance.new("ScreenGui")
 				MobileHudFoda10.Name = "MobileHudFoda1"
@@ -130,6 +146,26 @@ GenerateButton.MouseButton1Click:Connect(function()
 					end
 				end)			
 		]], game.StarterPlayer.StarterPlayerScripts)
+		
+		Instance.new('RemoteEvent', M1Script).Name = 'Block'
+		Instance.new('RemoteEvent', M1Script).Name = 'Clique'
+		
+		CreateModuleScript('Infos', [[
+		local module = {
+	
+	BasicDamage = 3,
+	FinalHit = 6,
+	FinalHitRagdoll = true,
+	Highlight = true
+	
+}
+
+return module
+
+		
+		]], M1Script)
+		
+		
 		
 		
 		do -- Awaken Bar
