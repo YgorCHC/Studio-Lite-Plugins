@@ -77,7 +77,7 @@ GenerateButton.MouseButton1Click:Connect(function()
 	--Properties:
 
 	SL_CodeTextBox.Name = "SL_CodeTextBox"
-	SL_CodeTextBox.Parent = game.Workspace.LocalScript
+	SL_CodeTextBox.Parent = M1_Client
 	SL_CodeTextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	SL_CodeTextBox.BorderColor3 = Color3.fromRGB(255, 170, 0)
 	SL_CodeTextBox.BorderSizePixel = 0
