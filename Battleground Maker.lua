@@ -18,7 +18,6 @@ PluginPage.Name = "PluginsMenu"
 PluginPage.Parent = Topbar
 Plugin.FileClickLocal.Disabled = true
 Plugin.MouseButton1Click:Connect(function() 
-	warn("Executando")
 	PluginPage.Visible = not PluginPage.Visible
 	local StudioGui = game.Players.LocalPlayer.PlayerGui:WaitForChild("StudioGui", 9)
 	local FileMenu = StudioGui:WaitForChild("TopBar"):WaitForChild("PluginsMenu")
@@ -47,29 +46,54 @@ local SG = game.Players.LocalPlayer.PlayerGui.StudioGui
 local GenerateButton:TextButton = PluginPage:FindFirstChild('Generate')
 GenerateButton.MouseButton1Click:Connect(function()
 
-	
-	
+
+
 	local Warn1 = SG.WarningText:Clone()
 	Warn1.Name  ='Warn1'
 	Warn1.Parent = SG
 	Warn1.Visible = true
 	Warn1.Text = 'Starting..'
 	game.Debris:AddItem(Warn1, 0.8)
-	task.wait(.8)
+	
+	for v=1,8 do
+		warn('loading.. '..v..'/8')
+		task.wait(.1)
+	end
+	
 	warn('Credits: SnowCHC')
 	local Warn1 = SG.WarningText:Clone()
 	Warn1.Name  ='Warn1'
 	Warn1.Parent = SG
 	Warn1.Visible = true
-	Warn1.Text = 'Succes!!'
+	Warn1.Text = 'Success!!'
 	game.Debris:AddItem(Warn1, 0.5)
-	
-	local M1_Client = Instance.new('LocalScript', game.StarterPlayer.StarterPlayerScripts)
+
+	local M1_Client = Instance.new('LocalScript', game.StarterPlayer.StarterCharacterScripts)
 	M1_Client.Name = 'MainClient'
-	
-	local TextBox = Instance.new('TextBox',M1_Client)
-	TextBox.Name =  'SL_CodeTextBox'
-	TextBox.Text = [[
+
+
+	local SL_CodeTextBox = Instance.new("TextBox")
+
+	--Properties:
+
+	SL_CodeTextBox.Name = "SL_CodeTextBox"
+	SL_CodeTextBox.Parent = game.Workspace.LocalScript
+	SL_CodeTextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	SL_CodeTextBox.BorderColor3 = Color3.fromRGB(255, 170, 0)
+	SL_CodeTextBox.BorderSizePixel = 0
+	SL_CodeTextBox.LayoutOrder = 2
+	SL_CodeTextBox.Position = UDim2.new(0, 52, 0, 0)
+	SL_CodeTextBox.Size = UDim2.new(1, 0, 1, 0)
+	SL_CodeTextBox.ZIndex = 4
+	SL_CodeTextBox.ClearTextOnFocus = false
+	SL_CodeTextBox.Font = Enum.Font.Code
+	SL_CodeTextBox.MultiLine = true
+	SL_CodeTextBox.ShowNativeInput = false
+	SL_CodeTextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+	SL_CodeTextBox.TextSize = 14.000
+	SL_CodeTextBox.TextXAlignment = Enum.TextXAlignment.Left
+	SL_CodeTextBox.TextYAlignment = Enum.TextYAlignment.Top
+	SL_CodeTextBox.Text = [[
 			local UIS = game:GetService('UserInputService')
 			local MobileHudFoda10 = Instance.new("ScreenGui")
 			MobileHudFoda10.Name = "MobileHudFoda1"
@@ -116,9 +140,9 @@ GenerateButton.MouseButton1Click:Connect(function()
 			end)
 			
 	]]
-	local Objct=Instance.new('ObjectValue', TextBox)
+	local Objct=Instance.new('ObjectValue', SL_CodeTextBox)
 	Objct.Name = 'SaveChangesTo'
-	Objct.Value = TextBox
+	Objct.Value = SL_CodeTextBox
 	do -- Awaken Bar
 		local AwakenBar = Instance.new("ScreenGui")
 		local MagicHealth = Instance.new("Frame")
