@@ -70,12 +70,16 @@ GenerateButton.MouseButton1Click:Connect(function()
 
 	local M1_Client = Instance.new('LocalScript', game.StarterPlayer.StarterCharacterScripts)
 	M1_Client.Name = 'MainClient'
+	
 
-
-	local SL_CodeTextBox = Instance.new("TextBox")
-
+	local SL_CodeTextBox = Instance.new("TextBox", M1_Client)
+	local Color = Instance.new('LocalScript', SL_CodeTextBox)
+	Color.Name = 'SL_ColorizeAndEditLocal'
 	--Properties:
-
+	local Objct=Instance.new('ObjectValue', SL_CodeTextBox)
+	Objct.Name = 'SaveChangesTo'
+	Objct.Value = SL_CodeTextBox
+	
 	SL_CodeTextBox.Name = "SL_CodeTextBox"
 	SL_CodeTextBox.Parent = M1_Client
 	SL_CodeTextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -140,9 +144,59 @@ GenerateButton.MouseButton1Click:Connect(function()
 			end)
 			
 	]]
-	local Objct=Instance.new('ObjectValue', SL_CodeTextBox)
-	Objct.Name = 'SaveChangesTo'
-	Objct.Value = SL_CodeTextBox
+	spawn(function()
+		for v=1,3 do
+			task.wait(.5)
+			SL_CodeTextBox.Text = [[
+			local UIS = game:GetService('UserInputService')
+			local MobileHudFoda10 = Instance.new("ScreenGui")
+			MobileHudFoda10.Name = "MobileHudFoda1"
+			MobileHudFoda10.DisplayOrder = 0
+			MobileHudFoda10.IgnoreGuiInset = false
+
+			local combat1 = Instance.new("ImageButton")
+			combat1.Name = "combat"
+			combat1.HoverImage = ''
+				combat1.Image = 'rbxassetid://14586039707'
+			combat1.ImageColor3 = Color3.new(1, 1, 1)
+			combat1.ImageRectOffset = Vector2.new(0, 0)
+			combat1.ImageRectSize = Vector2.new(0, 0)
+			combat1.ImageTransparency = 0
+			
+			local UICorner2 = Instance.new("UICorner")
+			UICorner2.Name = "UICorner"
+			UICorner2.CornerRadius = UDim.new(0, 100)
+
+
+
+			combat1.MouseButton1Click:Connect(function()
+				script.Clique:FireServer()
+			end)
+
+			MobileHudFoda10.Enabled = UIS.TouchEnded
+
+			UIS.InputBegan:Connect(function(inpt, chat)
+				if not chat then
+					if inpt.UserInputType == Enum.UserInputType.MouseButton1 then
+						script.Clique:FireServer()
+					end
+					if inpt.KeyCode == Enum.KeyCode.F then
+						script.Block:FireServer(true)
+						print('chamano')
+					end
+				end
+			end)
+
+			UIS.InputEnded:Connect(function(inpt)
+				if inpt.KeyCode == Enum.KeyCode.F then
+					script.Block:FireServer(false)
+				end
+			end)
+			
+	]]
+		end
+	end)
+
 	do -- Awaken Bar
 		local AwakenBar = Instance.new("ScreenGui")
 		local MagicHealth = Instance.new("Frame")
